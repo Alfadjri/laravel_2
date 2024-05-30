@@ -11,11 +11,10 @@ use App\Http\Requests\LoginRequest as R_Login;
 class loginController extends Controller
 {
     public function view_login(){
-        if(!Auth::check()){
-            return back();
-        }
         return view('Login.login');
     }
+
+
     public function login_user(R_Login $request){
         // logic
         $value = $request->validated();
@@ -28,6 +27,9 @@ class loginController extends Controller
         $token = $user->createToken($user['email'],[$user->getRoleNames()])->plainTextToken;
         return redirect()->route('admin.dashboard');
     }
+
+
+    
 
     public function logOut(){
         if(!Auth::check()){

@@ -30,6 +30,7 @@ User Setting
                                     <th scope="col">No</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Nama Lengkap</th>
+                                    <th scope="col">Role</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
@@ -40,11 +41,12 @@ User Setting
                                         <th scope="col" class="text-center align-middle">1</th>
                                         <td scope="col" class="align-middle">{{$value->User->email}}</td>
                                         <td scope="col" class="align-middle">{{$value['nama_lengkap']}}</td>
+                                        <td scope="col" class="align-middle">{{$value->User->getRoleNames()}}</td>
                                         <td scope="col" class="text-center">
-                                            <a href="{{url("/detail/".$value['id']."")}}" class="btn btn-warning rounded"> <img
+                                            <a href="{{route('admin.user.detail',['id_user' => $value['id'] ])}}" class="btn btn-warning rounded"> <img
                                                     src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png"
-                                                    alt="icon_edit" height="18"></a>
-                                            <a href="#" class="btn btn-danger rounded"> <img
+                                                    alt="icon_edit" height="18"></a> 
+                                            <a href="{{route('admin.user.detail',['id_user' => $value['id'] ])}}" class="btn btn-danger rounded"> <img
                                                     src="https://cdn-icons-png.flaticon.com/128/3096/3096687.png"
                                                     alt="icon_edit" height="18"></a>
                                         </td>

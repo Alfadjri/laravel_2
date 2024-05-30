@@ -12,6 +12,6 @@ class adminController extends Controller
     // memanggil nama view dashboard user untuk admin
 
     public function index(){
-        return view('dashboard');
+        return view('admin.dashboard');
     }
 }

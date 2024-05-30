@@ -1,6 +1,6 @@
 @extends('admin.template.app')
 @section('title')
-User Setting > User Edit > Nama User
+User Setting > User Edit > {{$biodata['nama_lengkap']}}
 @endsection
 
 @section('content')
@@ -18,20 +18,21 @@ User Setting > User Edit > Nama User
                     <div class="col-7">
                         <div class="form-floating mb-3">
                             <label for="nama">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="nama" placeholder="Nama Lengkap">
+                            <input type="text" class="form-control" id="nama" placeholder="Nama Lengkap" value="{{(isset($biodata['nama_lengkap']) ? $biodata['nama_lengkap'] : "" )}}">
                         </div>
                         <div class="form-floating mb-3">
                             <label for="no_handphone">No Handphone</label>
-                            <input type="number" class="form-control" id="no_handphone" placeholder="08xxxxxxx">
+                            <input type="number" class="form-control" id="no_handphone" placeholder="08xxxxxxx" value="{{(isset($biodata['no_handphone']) ? $biodata['no_handphone'] : "" )}}">
                         </div>
                         <div class="form-floating mb-3">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="user@example.com">
+                            <input type="email" class="form-control" id="email" placeholder="user@example.com" value="{{(isset($biodata->user->email) ? $biodata->user->email: "" )}}">
                         </div>
+                     
                         <div class="form-floating mb-3">
                             <label for="alamat">Alamat</label>
                             <textarea class="form-control" placeholder="Leave a comment here" id="alamat"
-                                style="height: 100px"></textarea>
+                                style="height: 100px;">{{(isset($biodata['alamat']) ? $biodata['alamat'] : "" )}}</textarea>
                         </div>
                         <div class="form-floating mb-3">
                             <label for="role">Roles</label>
