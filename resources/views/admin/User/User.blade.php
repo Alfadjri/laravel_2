@@ -9,16 +9,21 @@ User Setting
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col d-flex justify-conten-start">
-                    <div class="input-group" style="width:30rem;">
-                        <input type="text" class="form-control" placeholder="Recipient's username"
-                            aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
-                    </div>
+                    <form action="{{route('admin.user.search', ['page_per_list' => 10])}}" method="get">
+                        @csrf
+                        @method('GET')
+                        <div class="input-group" style="width:30rem;">
+                            <input type="text" class="form-control" name="search" placeholder="Recipient's username"
+                                aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Serach</button>
+                        </div>
+                    </form>
                 </div>
                 <div class="col d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary"><img
+                    <a href="{{route('admin.user.create.page')}}" type="button" class="btn btn-primary"><img
                             src="   https://cdn-icons-png.flaticon.com/512/2312/2312400.png " alt="icon_add" width="20"
-                            style="margin-righ:10px;" /> Create User </button>
+                            style="margin-righ:10px;" /> Create User 
+                    </a>
                 </div>
             </div>
             <div class="mt-3">
@@ -36,19 +41,21 @@ User Setting
                             </thead>
                             <tbody>
                                 @foreach ($biodata as $value)
-                                   
+
                                     <tr class="text-start">
                                         <th scope="col" class="text-center align-middle">1</th>
                                         <td scope="col" class="align-middle">{{$value->User->email}}</td>
                                         <td scope="col" class="align-middle">{{$value['nama_lengkap']}}</td>
                                         <td scope="col" class="align-middle">{{$value->User->getRoleNames()}}</td>
                                         <td scope="col" class="text-center">
-                                            <a href="{{route('admin.user.detail',['id_user' => $value['id'] ])}}" class="btn btn-warning rounded"> <img
+                                            <a href="{{route('admin.user.detail', ['id_user' => $value['id']])}}"
+                                                class="btn btn-warning rounded"> <img
                                                     src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png"
-                                                    alt="icon_edit" height="18"></a> 
-                                            <a href="{{route('admin.user.detail',['id_user' => $value['id'] ])}}" class="btn btn-danger rounded"> <img
-                                                    src="https://cdn-icons-png.flaticon.com/128/3096/3096687.png"
                                                     alt="icon_edit" height="18"></a>
+                                            <a href="{{route('admin.user.delete', ['id_user' => $value['id']])}}"
+                                                class="btn btn-danger rounded"> <img
+                                                    src="https://cdn-icons-png.flaticon.com/128/3096/3096687.png"
+                                                    alt="icon_delete" height="18"></a>
                                         </td>
                                     </tr>
                                 @endforeach
