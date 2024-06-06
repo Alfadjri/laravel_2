@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 // model
 use App\Models\User as User;
@@ -67,8 +68,8 @@ class UserController extends Controller
                 'alamat'=> $values['alamat'],
             ]);
         }
-
-        return response()->json([
+        // return untuk rest api 
+        return response()->json_encode([
             'status' => [
                 'pesan' => "Berhasil update user",
             ],
@@ -106,5 +107,15 @@ class UserController extends Controller
         $biodata->delete();
         $user->delete();
         return true;
+    }
+
+    public function upload_image($id_user,$image){
+        $file = $image;
+        $nama_file = time().".".$file->getClientOriginalExtension();
+        $image_file = Storage::putFileAs('/public',$file,$nama_file); // function untuk upload
+        Biodata::find($id_user)->update([
+            'image' => $image_file,
+        ]);
+        return $image_file;
     }
 }

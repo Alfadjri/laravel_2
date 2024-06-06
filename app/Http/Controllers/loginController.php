@@ -35,10 +35,13 @@ class loginController extends Controller
         if(!Auth::check()){
             return false;
         }
+        
         Auth::user()->tokens()->each(function($token){
-                if(Auth::user()->id == $token->user_id){
+                dd(Auth::user()->id == $token->tokenable_id);
+                if(Auth::user()->id == $token->tokenable_id){
                     $token->delete();
                 }
+                
         });
         return redirect()->route('login');
     }

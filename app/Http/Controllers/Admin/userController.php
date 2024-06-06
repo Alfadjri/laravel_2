@@ -49,5 +49,18 @@ class userController extends C_User
         $biodata = $this->search($value['search']);
         return view('admin.User.User',['biodata'=> $biodata]);
     }
+
+    public function upload(Request $request){
+        $value = $request->validate([
+            'image' => ['required'],
+            'id' => ['required'],
+        ]);
+        $store_image = $this->upload_image($value['id'], $value['image']);
+
+        return response()->json([
+            'pesan' => "Berhasil",
+            'response' => asset($store_image),
+        ],200);
+    }
 }
 

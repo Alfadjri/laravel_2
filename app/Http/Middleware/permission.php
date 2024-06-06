@@ -17,9 +17,10 @@ class permission
     public function handle(Request $request, Closure $next,$permission_akses): Response
     {
         $next = $next($request);
-
+        
         if(!Auth::check()){
-            return about(403);
+            
+            return abort(403);
         }
         $user_permissions = Auth::user()->getPermissionsViaRoles();
         foreach($user_permissions as $key => $permission){

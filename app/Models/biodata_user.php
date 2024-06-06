@@ -21,6 +21,7 @@ class biodata_user extends Model
         'no_handphone',
         'alamat',
         'user_id',
+        'image',
     ];
 
     public function User() : HasOne
